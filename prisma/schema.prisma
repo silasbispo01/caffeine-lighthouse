@@ -1,0 +1,40 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id              String            @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  name            String            @unique
+  password        String
+  createdAt DateTime @default(now())
+}
+
+model Benchmarks {
+  id                  String            @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  name                String
+  status              Status            @default(stopped)
+  recurringTimePeriod TimePeriod        @default(weekly)
+  lastTaskTime        DateTime?
+  createdAt           DateTime          @default(now())
+  urls                String[]
+  ownersId            String[]
+}
+
+enum Status {
+  active
+  running
+  stopped
+}
+
+enum TimePeriod {
+  daily
+  weekly
+  biweekly
+  monthly
+}
