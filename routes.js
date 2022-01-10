@@ -1,9 +1,10 @@
 import express from "express";
 import auth from "./src/auth/index.js";
-import { createBenchmark, userBenchmark } from "./src/controllers/benchmark.controller.js";
-import { createUser, loginUser } from "./src/controllers/user.controller.js";
-export const router = express.Router();
 
+import { createUser, loginUser } from "./src/controllers/user.controller.js";
+import { createBenchmark, userBenchmark } from "./src/controllers/benchmark.controller.js";
+
+export const router = express.Router();
 
 // User
 router.post('/new', createUser);

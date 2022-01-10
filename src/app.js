@@ -1,6 +1,12 @@
-import { app } from "../server";
-import { lighthouseBenchmark } from "../src/services/lighthouse.service";
+import express from "express";
 
-app.on('run-task', () => {
+const app = express();
 
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+
+app.on('@user:created', () => {
+  console.log('Novo usuário criado!')
 })
+
+export { app };

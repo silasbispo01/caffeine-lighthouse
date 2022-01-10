@@ -48,7 +48,9 @@ export const userBenchmark = async (req, res) => {
       }
     })
 
-    if(!Benchmarks) return res.status(404).json("Nenhum benchmark foi encontrado")
+    if(Benchmarks == 0) return res.status(404).json("Nenhum benchmark foi encontrado")
+
+    console.log(Benchmarks.length)
 
     res.json(Benchmarks);
   } catch (err) {

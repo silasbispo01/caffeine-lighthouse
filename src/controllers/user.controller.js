@@ -1,6 +1,8 @@
-import { prisma } from "../db/index.js"
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
+import { app } from "../app.js";
+import { prisma } from "../db/index.js"
 
 export const createUser = async (req, res) => {
   let { name, password } = req.body;
@@ -22,6 +24,7 @@ export const createUser = async (req, res) => {
       }
     })
     
+    app.emit('@user:created');
     res.send(newUser);
   } catch(err) {
     res.json({erro: err.message});
